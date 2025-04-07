@@ -49,13 +49,12 @@ const io = socketIo(server);
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
+// Serve static files from the public directory
+app.use(express.static(__dirname + '/public'));
 
 io.on('connection', (socket) => {
     console.log('a user connected');
-    
+
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
